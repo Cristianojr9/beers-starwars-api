@@ -1,33 +1,45 @@
-import React, { useEffect, useState } from 'react'
-import Film from '../../components/Film'
+import React, { useEffect, useState } from 'react';
+import { CircularProgress } from '@material-ui/core';
+import Film from '../../components/Film';
 import { Films } from './styles';
 
 import api from '../../services/apiStarWars';
 
 export default function Home() {
   const [films, setFilms] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadFilms() {
-      const response = await api.get('/films');
-      setFilms(response.data.results);
+      try {
+        setLoading(true);
+        const response = await api.get('/films');
+        setFilms(response.data.results);
+        setLoading(false);
+      } catch {
+        alert('error');
+      }
     }
     loadFilms();
   }, []);
 
-  console.log(films);
-
   return (
-    <Films>
-      {films.map((film) => (
-        <Film
-          key={film.id}
-          id={film.id}
-          name={film.title}
-          episode_id={film.episode_id}
-          opening_crawl={film.opening_crawl}
-        />
-      ))}
-    </Films>
+    <>
+      {loading ? (
+        <CircularProgress />
+      ) : (
+          <Films>
+            {films.map((film) => (
+              <Film
+                key={film.id}
+                id={film.id}
+                name={film.title}
+                episode_id={film.episode_id}
+                opening_crawl={film.opening_crawl}
+              />
+            ))}
+          </Films>
+        )}
+    </>
   )
 }
