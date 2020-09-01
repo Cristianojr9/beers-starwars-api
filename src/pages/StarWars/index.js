@@ -23,22 +23,26 @@ export default function Home() {
     loadFilms();
   }, []);
 
+  const filmsByEp = films.filter((film) => film.episode_id === 3);
+
   return (
     <>
       {loading ? (
         <CircularProgress />
       ) : (
-          <Films>
-            {films.map((film) => (
-              <Film
-                key={film.id}
-                id={film.id}
-                name={film.title}
-                episode_id={film.episode_id}
-                opening_crawl={film.opening_crawl}
-              />
-            ))}
-          </Films>
+          <>
+            <Films>
+              {films.map((film) => (
+                <Film
+                  key={film.id}
+                  id={film.id}
+                  name={film.title}
+                  episode_id={film.episode_id}
+                  opening_crawl={film.opening_crawl}
+                />
+              ))}
+            </Films>
+          </>
         )}
     </>
   )

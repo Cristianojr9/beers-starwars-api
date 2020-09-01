@@ -22,5 +22,5 @@ Post.propTypes = {
   id: PropTypes.number,
   name: PropTypes.string,
   opening_crawl: PropTypes.string,
-  episode_id: PropTypes.string
+  episode_id: PropTypes.number
 };

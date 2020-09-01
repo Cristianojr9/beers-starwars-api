@@ -9,7 +9,6 @@ export default function Post({ id, name, tagline, description, image_url, like }
       <h1>{name}</h1>
       <h2>{tagline}</h2>
       <p>{description}</p>
-      <button>{like}</button>
     </Container>
   )
 }
